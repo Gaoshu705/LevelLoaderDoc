@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "LevelLoader",
   description: "一个简化添加自定义关卡到植物大战僵尸融合版的模组",
+  base: '/LevelLoaderDoc/',
   lang: 'zh-CN',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
