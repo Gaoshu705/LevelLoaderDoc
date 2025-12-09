@@ -14,7 +14,7 @@
 
 首先，你需要下载 LevelLoader.dll 文件。请从官方仓库获取最新版本：
 
-[LevelLoader 官方下载地址](https://github.com/your-repo/LevelLoader/releases)  <!-- 请替换为实际下载链接 -->
+[LevelLoader 下载地址](https://github.com/Gaoshu705/LevelLoaderDoc/releases/download/1.0.0/LevelLoader.zip)  <!-- 请替换为实际下载链接 -->
 
 ### 2. 放置 LevelLoader.dll
 
