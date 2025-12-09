@@ -63,26 +63,19 @@ jobs:
           # version: 9
           run_install: false
 
-        # 安装依赖
+      # 安装依赖
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-        # 构建项目
+      # 构建项目
       - name: Build blog project
-        run: |
-          echo ${{ github.workspace }}
-          pnpm build
+        run: pnpm build
 
-        # 资源拷贝
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./docs/.vitepress/dist
-          destination: ./_site
-
-        # 上传 _site 的资源，用于后续部署
+      # 上传构建输出目录
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./.vitepress/dist
 
   # 部署任务
   deploy:
