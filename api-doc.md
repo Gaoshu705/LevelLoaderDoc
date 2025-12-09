@@ -26,6 +26,8 @@ namespace LevelLoader
         public Sprite LevelSprite { get; set; }
         public SceneType SceneType { get; set; }
         public GameObject ScenePrefab { get; set; }
+        public MusicType MusicType { get; set; }
+        public AudioClip MusicAudio {  get; set; }
         public int MaxWave { get; set; }
         public System.Collections.Generic.List<ZombieType> ZombieTypes { get; set; }
         public int[,] MapRoadTypes { get; set; }
@@ -83,6 +85,18 @@ namespace LevelLoader
 - **类型**: `UnityEngine.GameObject`
 - **描述**: 关卡场景的预制体
 - **示例**: 包含地图、背景和基本配置的GameObject
+
+### MusicType
+
+- **类型**: `MusicType`（枚举）
+- **描述**: 关卡的音乐类型，用于在游戏中播放不同的背景音乐
+- **示例值**: `Day`, `Night`, `Pool`, 更多枚举值可在[MusicType 枚举](#musictype-1)中查看
+
+### MusicAudio
+
+- **类型**: `UnityEngine.AudioClip`
+- **描述**: 关卡的音乐音频文件
+- **示例**: 自定义的背景音乐文件
 
 ### MaxWave
 
@@ -194,6 +208,39 @@ public enum BoxType
 }
 ```
 
+### MusicType
+
+定义关卡的音乐类型：
+```cs
+public enum MusicType
+{
+	public const MusicType MainMenu = 0;
+	public const MusicType SelectCard = 1;
+	public const MusicType Day = 2;
+	public const MusicType Day_drum = 3;
+	public const MusicType Night = 4;
+	public const MusicType Night_drum = 5;
+	public const MusicType Pool = 6;
+	public const MusicType Pool_drum = 7;
+	public const MusicType Fog = 8;
+	public const MusicType Fog_drum = 9;
+	public const MusicType Roof = 10;
+	public const MusicType Roof_drum = 11;
+	public const MusicType Roof_pre = 12;
+	public const MusicType Loon = 13;
+	public const MusicType UltimateBattle = 14;
+	public const MusicType WinMusic = 15;
+	public const MusicType IZ = 16;
+	public const MusicType Garden = 17;
+	public const MusicType Boss = 18;
+	public const MusicType Boss2 = 19;
+	public const MusicType Snow = 20;
+	public const MusicType Snow_drum = 21;
+	public const MusicType Snow_boss = 22;
+	public const MusicType RoofPool = 23;
+	public const MusicType RoofPool_drum = 24;
+}
+```
 ## Tools 类
 
 `Tools` 类提供了一系列便捷方法，用于资源加载和关卡管理，是 LevelLoaderAPI 的简化封装。

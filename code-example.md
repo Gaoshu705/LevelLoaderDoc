@@ -124,4 +124,82 @@ public class Plugin : BasePlugin
 ```
 ## 手动加载场景实现
 ```cs
+using BepInEx;
+using BepInEx.Logging;
+using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
+using LevelLoader;
+using System;
+using System.IO;
+using System.Reflection;
+using UnityEngine;
+namespace RiverReverseLevel;
+
+[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+public class Plugin : BasePlugin
+{
+    internal static new ManualLogSource Log;
+    public static LevelEntity levelEntity = new LevelEntity
+    {
+        LevelType = (LevelType)20,
+        LevelNum = 3,
+        LevelName = "反转大河奔流",
+        LevelNameEn = "RiverReverse",
+        SceneType = (SceneType)36,
+        MusicType = MusicType.Pool,
+        MaxWave = 40,
+        ZombieTypes = new System.Collections.Generic.List<ZombieType>()
+        {
+            ZombieType.NormalZombie,
+            ZombieType.FlagZombie,
+            ZombieType.ConeZombie,
+            ZombieType.BucketZombie,
+            ZombieType.SnorkleZombie,
+            ZombieType.Dolphinrider,
+            ZombieType.KirovZombie,
+            ZombieType.BalloonZombie,
+            ZombieType.SnowDolphinrider,
+            ZombieType.IronBalloonZombie,
+            ZombieType.LevatationZombie,
+            ZombieType.SuperSubmarine,
+            ZombieType.IronBalloonZombie2
+        },
+        MapRoadTypes = new int[,]
+        {
+            {1,1,1,1,0,0,1,1,1,1,1,1,1 },
+            {1,1,1,0,0,0,0,1,1,1,1,1,1 },
+            {1,1,1,0,0,0,0,1,1,1,1,1,1 },
+            {1,1,1,0,0,0,0,1,1,1,1,1,1 },
+            {1,1,1,1,0,0,1,1,1,1,1,1,1 },
+            {1,1,1,1,0,0,1,1,1,1,1,1,1 }
+        },
+        EnterAction = () =>
+        {
+            Board.Instance.theSun = 1000;
+            Board.BoardTag boardTag = Board.Instance.boardTag;
+            boardTag.isSeedRain = true;
+            Board.Instance.boardTag = boardTag;
+        }
+    };
+
+    public override void Load()
+    {
+        // Plugin startup logic
+        Log = base.Log;
+        Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        new Harmony($"{MyPluginInfo.PLUGIN_NAME}").PatchAll();
+        LoadMap();
+    }
+
+    public static void LoadMap()
+    {
+        // 游戏根目录下必须存在地图文件
+        AssetBundle ab = Tools.LoadAssetBundle(null, "RiverReverse/RiverReverseLevel");
+        // 获取ab包中的地图预制件
+        GameObject mapPrefab = ab.LoadAsset("RiverReverse").TryCast<GameObject>();
+        levelEntity.ScenePrefab = mapPrefab;
+        if (levelEntity.ScenePrefab != null)
+            Tools.RegisterLevel(levelEntity);
+    }
+}
 ```

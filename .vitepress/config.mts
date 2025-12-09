@@ -10,7 +10,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
-      { text: 'API 文档', link: '/api-examples' }
+      { text: 'API 文档', link: '/api-doc' }
     ],
 
     sidebar: [
