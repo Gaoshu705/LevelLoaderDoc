@@ -69,7 +69,7 @@ jobs:
 
       # 构建项目
       - name: Build blog project
-        run: pnpm build
+        run: pnpm doc:build
 
       # 上传构建输出目录
       - name: Upload artifact
